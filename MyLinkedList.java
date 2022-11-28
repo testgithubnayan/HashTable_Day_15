@@ -1,20 +1,11 @@
 package com.bridgelabz.hashtable;
 
-public class MyLinkedList<K,V> {
+public class LinkedList<K,V> {
     MyMapNode<K,V> head;
     MyMapNode<K,V> tail;
 
-    public MyMapNode<K,V> search(K searchData) {
-        MyMapNode<K,V> temp = head;
-        while(temp != null){
-            if(temp.key.equals(searchData))
-                return temp;
-            temp = temp.next;
-        }
-        return null;
-    }
-
-    public void append(MyMapNode<K,V> newNode ) {
+    public void add(K key,V value) {
+        MyMapNode<K,V> newNode = new MyMapNode<K,V>(key,value);
         if(head == null) {
             head = newNode;
             tail = newNode;
@@ -25,19 +16,46 @@ public class MyLinkedList<K,V> {
         }
     }
 
-    public void print(){
-        MyMapNode<K,V> temp = head;
-        while(temp != null){
-            System.out.println(temp);
+    public void replace(K key, V value) {
+        MyMapNode<K, V> temp = head;
+        while (temp != null) {
+            if (temp.key.equals(key)) {
+                temp.value = value;
+            }
             temp = temp.next;
         }
     }
 
-    @Override
-    public String toString() {
-        return "LinkedList{" +
-                "head=" + head +
-                ", tail=" + tail +
-                '}';
+    public boolean containsKey(String key){
+        MyMapNode<K,V> temp = head;
+        while(temp != null){
+            if(temp.key.equals(key)){
+                return true;
+            }
+            temp = temp.next;
+        }
+        return false;
+
+    }
+
+    public int get(String word){
+        MyMapNode<K,V> temp = head;
+        int count = 0;
+        while(temp != null){
+            if(temp.key.equals(word)){
+                count++;
+            }
+            temp = temp.next;
+        }
+        return count;
+    }
+
+
+    public void print() {
+        MyMapNode<K,V> temp = head;
+        while(temp != null){
+            System.out.print("{ " + temp.key + "=" + temp.value + " }" + "\n");
+            temp = temp.next;
+        }
     }
 }
